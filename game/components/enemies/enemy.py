@@ -12,8 +12,8 @@ class Enemy(Sprite):
     SPEED_X = 5
     MOV_X = {0: 'left', 1: 'right'}
 
-    def __init__(self):
-        self.image = pygame.transform.scale(ENEMY_1,(self.ENEMY_WIDTH, self.ENEMY_HEIGHT))
+    def __init__(self,tipe_enemy):
+        self.image = pygame.transform.scale(ENEMY_1[tipe_enemy],(self.ENEMY_WIDTH, self.ENEMY_HEIGHT))
         self.rect = self.image.get_rect()
         self.rect.x = self.X_POS_LIST[random.randint(0,10)]*random.randint(1,2)
         self.rect.y = self.Y_POS
