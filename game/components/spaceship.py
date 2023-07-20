@@ -16,6 +16,7 @@ class Spaceship(Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = self.X_POS
         self.rect.y = self.Y_POS
+        self.type = 'type' 
 
     def update(self, user_input):
         #movimiento en diagonal hacia abajo izquierda

@@ -7,10 +7,10 @@ class EnemyManager:
         self.enemies = []
         self.index=0
     
-    def update(self):
+    def update(self, game):
         self.add_enemy()
         for enemy in self.enemies:
-            enemy.update()
+            enemy.update(game)
             if enemy.rect.y >= SCREEN_HEIGHT:
                 self.enemies.remove(enemy)
                 
@@ -19,17 +19,14 @@ class EnemyManager:
             enemy.draw(screen)
 
     def add_enemy(self):
-        #añadi que haya 3 enemigos
-        if len(self.enemies) < 3:
-            #que este en un rango de 1 a 100
-            self.index = random.randint(1,100)
-            #divide entre 12 y saca la probabilidad de quien sale mas que si el residio sale en el rango de 0 a 7 
-            if self.index % 12 <= 7  :
-                enemy = Enemy(0)
-            #divide entre 12 y saca la probabilidad de quien sale mas de 0 a 10
-            elif self.index % 12 <= 10:            
-                enemy = Enemy(1)
-            #si no esta en el rango de 7 o 10 y si sale 11 saca este enemigo 
-            else:
-                enemy = Enemy(2)
+        enemy_type = random.randint(1,2)
+        if enemy_type == 1:
+            enemy = Enemy()
+        else:
+            x_speed = 5
+            y_speed = 2
+            move_x_for = [50, 120]
+            enemy = Enemy(enemy_type, x_speed, y_speed, move_x_for)
+            
+        if len(self.enemies) <1:
             self.enemies.append(enemy)
