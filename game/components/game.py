@@ -1,3 +1,4 @@
+from game.components.sounds.sound_manager import SoundUtils
 import pygame
 from game.components.menu import Menu
 from game.components.bullets.bullet_manager import BulletManager
@@ -27,6 +28,7 @@ class Game:
         self.score = 0
         self.highest_score =  0
         self.power_up_manager = PowerUPManager()
+        self.sound_game = SoundUtils()
 
     def execute(self):
         self.running = True
@@ -41,6 +43,7 @@ class Game:
         self.score = 0
         self.enemy_manager.reset()
         self.playing = True
+        self.sound_game.sound_game_play()
         while self.playing:
             self.events()
             self.update()
@@ -115,11 +118,11 @@ class Game:
     
     def draw_power_up_time(self):
         if self.player.has_power_up:
-            time_to_show = round((self.player.power_time_up-pygame.time.get_ticks())/1000,2)
+            time_to_show = int(round((self.player.power_time_up-pygame.time.get_ticks())/1000,2))
             if time_to_show > 0:
                 message = f'{self.player.power_up_type.capitalize()} is enable for {time_to_show} second'
                 self.menu.update_message(self.screen,message, 0, (255,255,255))
             else:
-                self.palyer.has_power_up = False
+                self.player.has_power_up = False
                 self.player.power_up_type= DEFAULT_TYPE
                 self.player.set_image()

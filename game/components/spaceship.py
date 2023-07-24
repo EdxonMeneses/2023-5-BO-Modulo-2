@@ -77,8 +77,16 @@ class Spaceship(Sprite):
         elif user_input[pygame.K_DOWN]:
             if self.rect.bottom < SCREEN_HEIGHT - self.SPACESHIP_HEIGHT: 
                 self.rect.y += self.SPEED
+        #disparo
         elif user_input[pygame.K_m]:
             self.shoot(game)
+            
+        #disparo moviendo
+        elif user_input[pygame.K_UP] and user_input[pygame.K_m]:
+            self.shoot(game)
+            if self.rect.top > SCREEN_HEIGHT//2:
+                self.rect.y -= self.SPEED
+
 
     def draw(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))

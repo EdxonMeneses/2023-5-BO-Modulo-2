@@ -11,8 +11,10 @@ class EnemyManager:
         self.add_enemy()
         for enemy in self.enemies:
             enemy.update(game)
+            game.sound_game.sound_game_stop()
             if enemy.rect.y >= SCREEN_HEIGHT:
                 self.enemies.remove(enemy)
+            
                 
     def draw(self, screen):
         for enemy in self.enemies:

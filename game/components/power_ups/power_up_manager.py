@@ -21,13 +21,13 @@ class PowerUPManager:
             power_up.update(game.game_speed)
             if power_up.rect.y >= SCREEN_HEIGHT:
                 self.power_ups.remove(power_up)
-            
             if game.player.rect.colliderect(power_up.rect):
                 power_up.start_time = pygame.time.get_ticks()
                 game.player.power_up_type = power_up.type
                 game.player.has_power_up = True
                 game.player.power_time_up = power_up.start_time + (self.duration *1000)
                 game.player.set_image((65,75), SPACESHIP_SHIELD)
+                game.sound_game.sound_shield()
                 self.power_ups.remove(power_up)
                 
 
