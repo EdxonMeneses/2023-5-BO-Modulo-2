@@ -32,9 +32,6 @@ BULLET_ENEMY = pygame.image.load(os.path.join(IMG_DIR, "Bullet/bullet_2.png"))
 ENEMY_1 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_1.png"))
 ENEMY_2 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_2.png"))
 
-EXPLOSION = pygame.image.load(os.path.join(IMG_DIR, "Explosion/explosionPlayer.png"))
-EXPLOSION_ENEMY = pygame.image.load(os.path.join(IMG_DIR, "Explosion/explosionEnemy.png"))
-
 SONG_GAME = pygame.mixer.Sound(os.path.join(IMG_DIR,"Song/songGame.mp3"))
 SONG_LOSE = pygame.mixer.Sound(os.path.join(IMG_DIR,"Song/songLose.mp3"))
 SONG_SHIELD = pygame.mixer.Sound(os.path.join(IMG_DIR,"Song/songShield.mp3"))
