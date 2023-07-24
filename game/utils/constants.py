@@ -35,7 +35,7 @@ ENEMY_2 = pygame.image.load(os.path.join(IMG_DIR, "Enemy/enemy_2.png"))
 SONG_GAME = pygame.mixer.Sound(os.path.join(IMG_DIR,"Song/songGame.mp3"))
 SONG_LOSE = pygame.mixer.Sound(os.path.join(IMG_DIR,"Song/songLose.mp3"))
 SONG_SHIELD = pygame.mixer.Sound(os.path.join(IMG_DIR,"Song/songShield.mp3"))
-SONG_DEATH = pygame.mixer.Sound(os.path.join(IMG_DIR,"Song/songDeath.mp3"))
+SONG_DEATH = pygame.mixer.Sound(os.path.join(IMG_DIR,"Song/songDeath2.mp3"))
 SONG_MACHINEGUN = pygame.mixer.Sound(os.path.join(IMG_DIR,"Song/HeavyMachineGun.mp3"))
     
 

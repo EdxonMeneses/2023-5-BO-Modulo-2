@@ -23,8 +23,10 @@ class Spaceship(Sprite):
         self.power_up_type = DEFAULT_TYPE
         self.power_up_shoot = HEAVY_MACHINE_GUN_TYPE
         self.has_power_up = False
+        self.has_power_up_shoot = False
         self.power_time_up = 0
-        self.power_time_up_shoot = 0
+        
+
 
     def update(self, user_input,game):
         #movimiento en diagonal hacia abajo izquierda
@@ -35,6 +37,9 @@ class Spaceship(Sprite):
             if self.rect.left > 0 and self.rect.bottom < SCREEN_HEIGHT:
                 self.rect.x -= 5
                 self.rect.y += 5
+            if user_input[pygame.K_m]:
+                self.shoot(game)
+
         #movimiento diagonal hacia arriba izquierda
         elif user_input[pygame.K_UP] and user_input[pygame.K_LEFT]:
             if self.rect.x == 0 and self.rect.top > SCREEN_HEIGHT//2:
@@ -43,6 +48,8 @@ class Spaceship(Sprite):
             if self.rect.left > 0 and self.rect.top > SCREEN_HEIGHT//2:
                 self.rect.x -= 5
                 self.rect.y -= 5
+            if user_input[pygame.K_m]:
+                self.shoot(game)    
         #movimiento diagonal hacia arriba derecha
         elif user_input[pygame.K_UP] and user_input[pygame.K_RIGHT]:
             if self.rect.x > SCREEN_WIDTH-self.SPACESHIP_WIDTH and self.rect.top > SCREEN_HEIGHT//2:
@@ -51,6 +58,8 @@ class Spaceship(Sprite):
             if self.rect.right < SCREEN_WIDTH and self.rect.top > SCREEN_HEIGHT//2:
                 self.rect.x += 5
                 self.rect.y -= 5
+            if user_input[pygame.K_m]:
+                self.shoot(game)
         #movimiento diagonal hacia abajo derecha
         elif user_input[pygame.K_DOWN] and user_input[pygame.K_RIGHT]:
             if self.rect.x > SCREEN_WIDTH-self.SPACESHIP_WIDTH and self.rect.bottom < SCREEN_HEIGHT:
@@ -59,6 +68,8 @@ class Spaceship(Sprite):
             if self.rect.right < SCREEN_WIDTH and self.rect.bottom < SCREEN_HEIGHT:
                 self.rect.x += 5
                 self.rect.y += 5
+            if user_input[pygame.K_m]:
+                self.shoot(game)
 
         #va a la izquierda 
         elif user_input[pygame.K_LEFT]:
@@ -66,29 +77,31 @@ class Spaceship(Sprite):
                 self.rect.x = SCREEN_WIDTH - self.SPACESHIP_WIDTH
             if self.rect.left > 0:
                 self.rect.x -= self.SPEED
+            if user_input[pygame.K_m]:
+                self.shoot(game)
         #va a la derecha
         elif user_input[pygame.K_RIGHT]:
             if self.rect.x > SCREEN_WIDTH - self.SPACESHIP_WIDTH - self.SCREEN_ERROR:
                 self.rect.x = self.SPEED
             if self.rect.right < SCREEN_WIDTH:
                 self.rect.x += self.SPEED
+            if user_input[pygame.K_m]:
+                self.shoot(game)
         #va arriba
         elif user_input[pygame.K_UP]:
             if self.rect.top > SCREEN_HEIGHT//2:
                 self.rect.y -= self.SPEED
+            if user_input[pygame.K_m]:
+                self.shoot(game)
         #va abajo
         elif user_input[pygame.K_DOWN]:
-            if self.rect.bottom < SCREEN_HEIGHT - 40: 
+            if self.rect.bottom < SCREEN_HEIGHT : 
                 self.rect.y += self.SPEED
+            if user_input[pygame.K_m]:
+                self.shoot(game)
         #disparo
         elif user_input[pygame.K_m]:
             self.shoot(game)
-            
-        #disparo moviendo
-        elif user_input[pygame.K_UP] and user_input[pygame.K_m]:
-            self.shoot(game)
-            if self.rect.top > SCREEN_HEIGHT//2:
-                self.rect.y -= self.SPEED
 
 
     def draw(self, screen):

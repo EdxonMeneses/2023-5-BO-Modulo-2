@@ -7,7 +7,7 @@ class PowerUps(Sprite):
         self.image = image 
         self.rect = self.image.get_rect()
         self.rect.y = 0
-        self.rect.x = random.randint(120, SCREEN_WIDTH - 120)
+        self.rect.x = random.randint(550, SCREEN_WIDTH - 120)
         self.type = type
         self.star_time = 0
 

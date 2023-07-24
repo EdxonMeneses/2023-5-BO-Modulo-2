@@ -33,6 +33,8 @@ class PowerUPManager:
                 game.player.set_image((65,75), SPACESHIP_SHIELD)
                 game.sound_game.sound_shield()
                 self.power_ups.remove(power_up) 
+                for power_up_shoot in self.power_ups_shoot:
+                    self.power_ups_shoot.remove(power_up_shoot) 
                 current_time = pygame.time.get_ticks()  
 
         for power_up_shoot in self.power_ups_shoot:
@@ -43,10 +45,12 @@ class PowerUPManager:
                 power_up_shoot.star_time = pygame.time.get_ticks()
                 game.player.power_up_type = power_up_shoot.type
                 game.player.has_power_up_shoot = True
-                game.player.power_time_up = power_up.star_time + (self.duration *1000)
+                game.player.power_time_up = power_up_shoot.star_time + (self.duration *1000)
                 game.player.set_image((65,75))
                 game.sound_game.sound_machinegun()
                 self.power_ups_shoot.remove(power_up_shoot)
+                self.power_ups.remove(power_up)
+                game.bullet_manager.burst = 3
                 current_time = pygame.time.get_ticks()  
                 
     def draw(self, screen):

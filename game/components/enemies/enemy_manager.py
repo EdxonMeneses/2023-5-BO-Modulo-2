@@ -1,6 +1,6 @@
 import random
 from game.components.enemies.enemy import Enemy
-from game.utils.constants import SCREEN_HEIGHT
+from game.utils.constants import SCREEN_HEIGHT,SHIELD_TYPE
 class EnemyManager:
 
     def __init__(self):
@@ -13,6 +13,13 @@ class EnemyManager:
             enemy.update(game)
             if enemy.rect.y >= SCREEN_HEIGHT:
                 self.enemies.remove(enemy)
+            if enemy.rect.colliderect(game.player.rect):
+                self.enemies.remove(enemy)
+                if  game.player.power_up_type != SHIELD_TYPE:
+                    game.death_count += 1
+                    game.playing = False 
+                    game.sound_game.sound_death()
+                    game.sound_game.sound_game_stop()
                 
     def draw(self, screen):
         for enemy in self.enemies:

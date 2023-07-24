@@ -5,6 +5,7 @@ class BulletManager:
     def __init__(self):
         self.player_bullets = []
         self.enemy_bullets  = []
+        self.burst = 1
 
 
     def update(self,game):
@@ -39,7 +40,7 @@ class BulletManager:
             bullet.draw(screen)
         
     def add_bullet(self, bullet):
-        if bullet.owner == 'player'and len(self.player_bullets)  < 5:
+        if bullet.owner == 'player'and len(self.player_bullets)  < self.burst:
             self.player_bullets.append(bullet)
         elif bullet.owner == 'enemy' and len(self.enemy_bullets) < 1:
             self.enemy_bullets.append(bullet)

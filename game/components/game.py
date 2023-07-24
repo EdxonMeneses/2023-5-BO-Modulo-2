@@ -72,6 +72,7 @@ class Game:
         self.draw_score()
         self.power_up_manager.draw(self.screen)
         self.draw_power_up_time()
+        self.draw_power_up_shoot_time()
         pygame.display.update()
 
     def draw_background(self):
@@ -120,19 +121,20 @@ class Game:
             time_to_show = int(round((self.player.power_time_up-pygame.time.get_ticks())/1000,2))
             if time_to_show > 0:
                 message = f'{self.player.power_up_type.capitalize()} is enable for {time_to_show} second'
-                self.menu.update_message(self.screen,message, 0, (255,255,255))
+                self.menu.update_message(self.screen,message, 250, (255,255,255))
             else:
                 self.player.has_power_up = False
                 self.player.power_up_type= DEFAULT_TYPE
                 self.player.set_image()
     
     def draw_power_up_shoot_time(self):
-        if self.player.has_power_up:
-            time_to_shoot = int(round((self.player.power_time_up-pygame.time.get_ticks())/1000,2))
-            if time_to_shoot > 0:
-                message = f'{self.player.power_up_type.capitalize()} is enable for {time_to_shoot} second'
-                self.menu.update_message(self.screen,message, 0, (255,255,255))
+        if self.player.has_power_up_shoot:
+            time_to_show = int(round((self.player.power_time_up-pygame.time.get_ticks())/1000,2))
+            if time_to_show > 0:
+                message = f'{self.player.power_up_shoot.capitalize()} is enable for {time_to_show} second'
+                self.menu.update_message(self.screen,message, 220, (255,255,255))
             else:
-                self.player.has_power_up = False
+                self.player.has_power_up_shoot = False
                 self.power_up_shoot = HEAVY_MACHINE_GUN_TYPE
+                self.bullet_manager.burst=1
                 self.player.set_image()
