@@ -28,6 +28,8 @@ class BulletManager:
                 if  game.player.power_up_type != SHIELD_TYPE:
                     game.death_count += 1
                     game.playing = False 
+                    game.sound_game.sound_death()
+                    game.sound_game.sound_game_stop()
 
     def draw(self,screen):
         for bullet in self.player_bullets:
@@ -37,7 +39,7 @@ class BulletManager:
             bullet.draw(screen)
         
     def add_bullet(self, bullet):
-        if bullet.owner == 'player'and len(self.player_bullets)  < 1:
+        if bullet.owner == 'player'and len(self.player_bullets)  < 5:
             self.player_bullets.append(bullet)
         elif bullet.owner == 'enemy' and len(self.enemy_bullets) < 1:
             self.enemy_bullets.append(bullet)

@@ -5,7 +5,7 @@ from game.components.bullets.bullet_manager import BulletManager
 from game.components.enemies.enemy_manager import EnemyManager
 from game.components.power_ups.power_up_manager import PowerUPManager
 
-from game.utils.constants import BG, FONT_STYLE, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE
+from game.utils.constants import BG, FONT_STYLE, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, HEAVY_MACHINE_GUN_TYPE
 from game.components.spaceship import Spaceship
 
 class Game:
@@ -83,7 +83,7 @@ class Game:
             self.y_pos_bg = 0
         self.y_pos_bg += self.game_speed
 
-    def show_menu(self):
+    def show_menu(self,):
         self.menu.reset_screen_color(self.screen)
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
@@ -94,10 +94,9 @@ class Game:
             self.update_highest_score()
             self.menu.update_message(self.screen,'Game over. Press any key to restart',0)
             self.menu.update_message(self.screen, f'Your score: {self.score}',30)
-            self.menu.update_message(self.screen, f'Highset score: {self.highest_score}', 60)
-            self.menu.update_message(self.screen, f'Total deaths: {self.death_count}', 90)
-            #self.menu.draw(self.screen)
-
+            self.menu.update_message(self.screen, f'Highset score: {self.highest_score}', 63)
+            self.menu.update_message(self.screen, f'Total deaths: {self.death_count}', 100)
+            
         icon = self.image = pygame.transform.scale(ICON,(80,120))
         self.screen.blit(icon, (half_screen_width-50,half_screen_height-150))
         self.menu.update(self)
@@ -125,4 +124,15 @@ class Game:
             else:
                 self.player.has_power_up = False
                 self.player.power_up_type= DEFAULT_TYPE
+                self.player.set_image()
+    
+    def draw_power_up_shoot_time(self):
+        if self.player.has_power_up:
+            time_to_shoot = int(round((self.player.power_time_up-pygame.time.get_ticks())/1000,2))
+            if time_to_shoot > 0:
+                message = f'{self.player.power_up_type.capitalize()} is enable for {time_to_shoot} second'
+                self.menu.update_message(self.screen,message, 0, (255,255,255))
+            else:
+                self.player.has_power_up = False
+                self.power_up_shoot = HEAVY_MACHINE_GUN_TYPE
                 self.player.set_image()

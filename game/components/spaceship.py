@@ -2,7 +2,7 @@ import pygame
 from game.components.bullets.bullet import Bullet
 from pygame.sprite import Sprite
 
-from game.utils.constants import DEFAULT_TYPE, SPACESHIP, SCREEN_HEIGHT, SCREEN_WIDTH
+from game.utils.constants import DEFAULT_TYPE, SPACESHIP, SCREEN_HEIGHT, SCREEN_WIDTH, HEAVY_MACHINE_GUN_TYPE
 
 class Spaceship(Sprite):
     SPACESHIP_WIDTH = 40
@@ -19,9 +19,12 @@ class Spaceship(Sprite):
         self.rect.x = self.X_POS
         self.rect.y = self.Y_POS
         self.type = 'player'
+        self.explosion = 'player'
         self.power_up_type = DEFAULT_TYPE
+        self.power_up_shoot = HEAVY_MACHINE_GUN_TYPE
         self.has_power_up = False
         self.power_time_up = 0
+        self.power_time_up_shoot = 0
 
     def update(self, user_input,game):
         #movimiento en diagonal hacia abajo izquierda
@@ -75,7 +78,7 @@ class Spaceship(Sprite):
                 self.rect.y -= self.SPEED
         #va abajo
         elif user_input[pygame.K_DOWN]:
-            if self.rect.bottom < SCREEN_HEIGHT - self.SPACESHIP_HEIGHT: 
+            if self.rect.bottom < SCREEN_HEIGHT - 40: 
                 self.rect.y += self.SPEED
         #disparo
         elif user_input[pygame.K_m]:
